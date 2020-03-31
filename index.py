@@ -6,7 +6,7 @@ from os.path import isfile, join
 
 from pathlib import Path
 
-import os, errno
+import os, errno, shutil
 
 root = Tk()
 root.withdraw()
@@ -29,6 +29,12 @@ for x in onlyfiles:
         if e.errno != errno.EEXIST:
             raise
     # Path("{folder_selected}/{y}").mkdir(parents=True, exist_ok=True)
+
+for x in onlyfiles:
+    y = '{}-{}-{}'.format(x[0:4], x[4:6], x[6:8])
+    src = folder_selected + "/" + x
+    dst = folder_selected + "/" + y
+    shutil.move(src, dst)
 
 
 # new_string = '{}-{}-{}'.format(old_string[:5], old_string[5:7], old_string[7:])
